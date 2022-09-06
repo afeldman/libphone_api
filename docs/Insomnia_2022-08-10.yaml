@@ -1,0 +1,189 @@
+_type: export
+__export_format: 4
+__export_date: 2022-08-10T10:06:23.451Z
+__export_source: insomnia.desktop.app:v2022.5.0
+resources:
+  - _id: req_wrk_1b184a8023fd4a68b20ed307ad4b0ebdc7956d31
+    parentId: fld_wrk_1b184a8023fd4a68b20ed307ad4b0ebd7d5e2c8e
+    modified: 1660125843160
+    created: 1660125843160
+    url: "{{ base_url }}/{{ number }}"
+    name: parse a phonenumber
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1660125843161
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_wrk_1b184a8023fd4a68b20ed307ad4b0ebd7d5e2c8e
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660125843162
+    created: 1660125843162
+    name: phone_number
+    description: phone number
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1660125843162
+    _type: request_group
+  - _id: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    parentId: null
+    modified: 1660124370606
+    created: 1660124247238
+    name: New Document
+    description: get stanradrized phone information
+    scope: design
+    _type: workspace
+  - _id: req_091b0276543340ae9ad56395854f80b1
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660124247252
+    created: 1660124247252
+    url: ""
+    name: New Request
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1660124247252
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_6de63ba5039766244e02a4c083d7c87e60a999d0
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660124247248
+    created: 1660124247248
+    name: Base Environment
+    data:
+      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1660124247248
+    _type: environment
+  - _id: jar_6de63ba5039766244e02a4c083d7c87e60a999d0
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660124247250
+    created: 1660124247250
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_cfb06745a1ea469498fb3b0c4748deff
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660125859215
+    created: 1660124247245
+    fileName: Phone Number API
+    contents: >
+      openapi: 3.0.0
+
+      info:
+        description: "decode the phone number information into a standard telephone schema"
+        version: 0.1.0
+        title: Phone Number API
+        termsOfService: https://.../terms/
+        contact:
+          email: anton.feldmann@gmail.com
+        license:
+          name: MIT
+          url: https://MIT-License.org
+
+      tags:
+        - name: phone_number
+          description: phone number
+          externalDocs:
+            description: phone number informations
+            url: https://.../docs
+
+      paths:
+        "/{number}":
+          post:
+            parameters:
+              - name: number
+                in: path
+                description: phone number in international standard definition
+                required: true
+                schema:
+                  type: string
+            tags:
+              - phone_number
+            summary: parse a phonenumber
+            description: "returns a interpreted phone number with informations"
+            operationId: phonenumber
+            responses:
+              "200":
+                description: parsing successful
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/PhoneNumber"
+              "500":
+                description: parser error
+
+      servers:
+        - url:  https://phonenumber....info/
+
+      components:
+        schemas:
+          PhoneNumber:
+            type: object
+            properties:
+              phone:
+                type: string
+              format:
+                type: object
+                properties:
+                  international:
+                    type: string
+                  local:
+                     type: string
+              valid:
+                type: boolean
+              contry:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  name:
+                   type: string
+                  prefix:
+                   type: string
+              location:
+                type: string
+              carrier:
+                type: string
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_1896cb96a44f42879b3dc79b8be6c8e2
+    parentId: wrk_1b184a8023fd4a68b20ed307ad4b0ebd
+    modified: 1660124247253
+    created: 1660124247253
+    name: Example Test Suite
+    _type: unit_test_suite
+  - _id: env_env_6de63ba5039766244e02a4c083d7c87e60a999d0_sub
+    parentId: env_6de63ba5039766244e02a4c083d7c87e60a999d0
+    modified: 1660125843164
+    created: 1660125843164
+    name: OpenAPI env
+    data:
+      scheme: https
+      base_path: ""
+      host: phonenumber....info
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1660125843164
+    _type: environment
