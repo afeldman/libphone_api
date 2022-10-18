@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 from re import template
@@ -27,8 +27,7 @@ class Phonenumber:
     location: str = ""
     carrier: str = ""
 
-
-@app.route("/<number>", methods=["POST"])
+@app.route("/<number>", methods=["POST","GET"])
 def phonenumber(number):
     """get the phonenumber information. Note only international coded numbering
     ---
